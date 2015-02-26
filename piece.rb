@@ -1,7 +1,7 @@
 require 'colorize'
 
 class Piece
-  attr_reader :color
+  attr_reader :color, :board
   attr_accessor :pos
 
   def initialize(color, pos, board, king = false)
@@ -54,10 +54,36 @@ class Piece
   end
 
   def jump_options
+    options = []
 
+    move_dirs.each do |dir|
+      row1 = dir[0] + pos[0]
+      col1 = dir[1] + pos[1]
+
+      row2 = (dir[0] * 2) + pos[0]
+      col2 = (dir[1] * 2) + pos[1]
+
+      options << [row2, col2] if row2.between?(0, 7) &&
+                                 col2.between?(0, 7) &&
+                                 @board[[row2, col2]].nil? &&
+                                 !@board[[row1, col1]].nil? &&
+                                 @board[[row1, col1]].color != color
+    end
+
+    options
+  end
+
+  def jumped_pos(end_pos)
+    row = (pos[0] + end_pos[0]) / 2
+    col = (pos[1] + end_pos[1]) / 2
+    [row, col]
   end
 
   def perform_jump(end_pos)
+    !!if jump_options.include?(end_pos)
+      @board.remove_piece_at(jumped_pos(end_pos))
+      @board.move(pos, end_pos)
+    end
     # Write method perform_jump to perform a single move.
     # perform_jump should remove the jumped piece from the Board
     # An illegal slide/jump should return false; else true.

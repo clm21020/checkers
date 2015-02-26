@@ -8,12 +8,26 @@ b[[1,1]] = bp
 b[[2,2]] = rp
 b[[2,0]] = bk
 b.display
+puts "Press enter to see jump_options"
 gets
 
-p "bp.slide_options == []: #{bp.slide_options == []}"
-p "rp.slide_options == [[1, 3]]: #{rp.slide_options == [[1, 3]]}"
-p "rp.slide_options == [[1, 3]]: #{bk.slide_options == [[3, 1]]}"
+# p "bp.slide_options == []: #{bp.slide_options == []}"
+# p "rp.slide_options == [[1, 3]]: #{rp.slide_options == [[1, 3]]}"
+# p "rp.slide_options == [[1, 3]]: #{bk.slide_options == [[3, 1]]}"
 
+p "bp.jump_options == [[3, 3]]: #{bp.jump_options == [[3, 3]]}"
+p "rp.jump_options == [[0, 0]]: #{rp.jump_options == [[0, 0]]}"
+p "rp.jump_options == []: #{bk.jump_options == []}"
+
+puts "Press enter to perform jump"
+gets
+
+p "bp.pos == [1,1]: #{bp.pos == [1,1]}"
+p "bp.jumped_pos([3, 3]): #{bp.jumped_pos([3, 3])}"
+p "bp.perform_jump([3, 3]): #{bp.perform_jump([3, 3])}"
+p "bp.pos == [3,3]: #{bp.pos == [3,3]}"
+
+b.display
 
 
 

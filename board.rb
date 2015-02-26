@@ -39,11 +39,14 @@ class Board
 
   # @board.move(pos, end_pos)
 
-
   def move(start_pos, end_pos)
     piece = self[start_pos]
     self[start_pos] = nil
     self[end_pos] = piece
     piece.pos = end_pos
+  end
+
+  def remove_piece_at(pos)
+    self[pos] = nil
   end
 end
