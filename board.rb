@@ -4,7 +4,7 @@ class Board
   end
 
   def setup
-    
+
   end
 
   def display
@@ -32,11 +32,13 @@ class Board
   end
 end
 
+
+
 if __FILE__ == $PROGRAM_NAME
   b = Board.new
   b.display
-  gets
-  pos = [0, 2]
+  # gets
+  # pos = [0, 2]
   # b[pos] = 4
   # b.display
 end
