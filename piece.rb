@@ -84,9 +84,6 @@ class Piece
       @board.remove_piece_at(jumped_pos(end_pos))
       @board.move(pos, end_pos)
     end
-    # Write method perform_jump to perform a single move.
-    # perform_jump should remove the jumped piece from the Board
-    # An illegal slide/jump should return false; else true.
   end
 
   def move_sequence

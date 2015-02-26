@@ -23,9 +23,11 @@ puts "Press enter to perform jump"
 gets
 
 p "bp.pos == [1,1]: #{bp.pos == [1,1]}"
-p "bp.jumped_pos([3, 3]): #{bp.jumped_pos([3, 3])}"
+p "bp.jumped_pos([3, 3]) == [2, 2]: #{bp.jumped_pos([3, 3]) == [2, 2]}"
 p "bp.perform_jump([3, 3]): #{bp.perform_jump([3, 3])}"
 p "bp.pos == [3,3]: #{bp.pos == [3,3]}"
+
+p "rp.perform_jump([0, 0]) == false: #{rp.perform_jump([0, 0]) == false}"
 
 b.display
 
