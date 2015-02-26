@@ -36,27 +36,28 @@ class Piece
       row = dir[0] + pos[0]
       col = dir[1] + pos[1]
 
-      options << [row, col] if row.between?(0, 7) && col.between?(0, 7)
+      options << [row, col] if row.between?(0, 7) &&
+                               col.between?(0, 7) &&
+                               @board[[row, col]].nil?
     end
 
     options
   end
 
-  def jump_moves
-
-  end
-
   def perform_slide(end_pos)
-    ##########################################################################
-    if slide_options.include?(end_pos)
+    !!if slide_options.include?(end_pos)
       @board.move(pos, end_pos)
     end
 
-    # Write method perform_slide to perform a single move.
-    # An illegal slide/jump should return false; else true.
+  # Write method perform_slide to perform a single move.
+  # An illegal slide/jump should return false; else true.
   end
 
-  def perform_move(end_pos)
+  def jump_options
+
+  end
+
+  def perform_jump(end_pos)
     # Write method perform_jump to perform a single move.
     # perform_jump should remove the jumped piece from the Board
     # An illegal slide/jump should return false; else true.
@@ -67,53 +68,6 @@ class Piece
   end
 end
 
-
-
-# b = Board.new
-
-# #Testing Movement
-# bp = Piece.new(:black, [0,0])
-# #p bp
-# puts "black pawn move dirs: #{bp.move_dirs == [[1, 1], [1, -1]]}"
-# puts "black pawn slide options: #{bp.slide_options == [[1, 1]]}"
-#
-# bk = Piece.new(:black, [1, 1], true)
-# p bk
-# puts "black king move dirs: #{bk.move_dirs == [[1, 1], [1, -1], [-1, 1], [-1, -1]]}"
-# puts "black king slide options: #{bk.slide_options == [[2, 2], [2, 0], [0, 2], [0, 0]]}"
-#
-# rp = Piece.new(:red, [7, 7])
-# p rp
-# puts "red pawn move dirs: #{rp.move_dirs == [[-1, 1], [-1, -1]]}"
-# puts "red pawn slide options: #{rp.slide_options == [[6, 6]]}"
-#
-# rk = Piece.new(:red, [6, 6], true)
-# # p rk
-# puts "red king move dirs: #{rk.move_dirs == [[-1, 1], [-1, -1], [1, 1], [1, -1]]}"
-# puts "red king slide options: #{rk.slide_options == [[5, 7], [5, 5], [7, 7], [7, 5]]}"
-
-
-
-# #Testing king_me
-# bp2 = Piece.new(:black, [0,2])
-# rp2 = Piece.new(:red, [7, 5])
-# puts !bp2.king?
-# puts !rp2.king?
-#
-# bp2.king_me
-# rp2.king_me
-#
-# puts bp2.king?
-# puts rp2.king?
-
-
-
-# bk2.king
-
-
-
-
-# puts "test".colorize(:green)
 
 
 # ✓A non-king Piece can move forward only;

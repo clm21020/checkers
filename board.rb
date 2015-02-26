@@ -16,7 +16,7 @@ class Board
   end
 
   def display
-    system("clear")
+    # system("clear")
     @grid.each_with_index do |row, row_i|
       pieces = []
 
@@ -46,42 +46,4 @@ class Board
     self[end_pos] = piece
     piece.pos = end_pos
   end
-end
-
-
-
-if __FILE__ == $PROGRAM_NAME
-  b = Board.new
-  bp = Piece.new(:black, [0,0], b)
-  rp = Piece.new(:red, [7,7], b)
-  b[[0,0]] = bp
-  b[[7,7]] = rp
-  b.display
-  gets
-  b.move([0,0], [6, 6])
-  b.display
-  gets
-  b.move([7,7], [2, 2])
-  b.display
-  gets
-  puts "bp.pos : #{bp.pos}"
-  puts "rp.pos : #{rp.pos}"
-
-
-  # pos = [0, 2]
-  # b[pos] = 4
-  # b.display
-
-
-
-  # b = Board.new
-  # bp = Piece.new(:black, [0,0], b)
-  # b[0,0] = bp
-  # b.display
-  # gets
-  #
-  # b.move([0,0], [6, 6])
-  # b.display
-  #
-
 end
