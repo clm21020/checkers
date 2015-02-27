@@ -1,7 +1,8 @@
 require 'colorize'
+require 'byebug'
 
 class Piece
-  attr_reader :color, :board
+  attr_reader :color, :board, :king
   attr_accessor :pos
 
   def initialize(color, pos, board, king = false)
@@ -17,6 +18,11 @@ class Piece
 
   def king_me
     @king = true
+  end
+
+  def promote_maybe
+    king_row = color == :black ? 7 : 0
+    king_me if king == false && pos[0] == king_row
   end
 
   def move_dirs

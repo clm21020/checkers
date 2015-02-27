@@ -55,6 +55,7 @@ class Board
     self[start_pos] = nil
     self[end_pos] = piece
     piece.pos = end_pos
+    piece.promote_maybe
   end
 
   def remove_piece_at(pos)

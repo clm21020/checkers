@@ -65,10 +65,21 @@ end
 
 def test_promotion
   b = Board.new(false)
-  bp = Piece.new(:black, [6,0], b)
-  rp = Piece.new(:red, [1,7], b)
-  b[[6,0]] = bp
-  b[[1,7]] = rp
+  bp = Piece.new(:black, [5,1], b)
+  rp = Piece.new(:red, [2,6], b)
+  b[[5,1]] = bp
+  b[[2,6]] = rp
+
+  b.display
+
+  puts "!bp.king? #{!bp.king?}"
+  puts "!rp.king? #{!rp.king?}"
+
+  puts "Press enter to still see pawns"
+  gets
+
+  bp.perform_slide([6,0])
+  rp.perform_slide([1,7])
 
   b.display
 
