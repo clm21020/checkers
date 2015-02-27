@@ -7,12 +7,23 @@ class Board
     :red => "o".colorize(:red)
   }
 
-  def initialize
+  def initialize(real_game = true)
     @grid = Array.new(8) { Array.new(8) }
+    add_pieces if real_game
   end
 
-  def setup
+  def add_pieces
+    add_team(:black)
+    add_team(:red)
+  end
 
+  def add_team(color)
+    rows = color == :black ? (0..2) : (5..7)
+    rows.each do |row|
+      8.times do |col|
+        self[[row, col]] = Piece.new(color, [row, col], self) if ((row + col) % 2 == 0)
+      end
+    end
   end
 
   def display

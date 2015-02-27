@@ -1,37 +1,46 @@
 require_relative 'board'
 
-b = Board.new
-bp = Piece.new(:black, [1,1], b)
-rp = Piece.new(:red, [2,2], b)
-bk = Piece.new(:black, [2,0], b, true)
-b[[1,1]] = bp
-b[[2,2]] = rp
-b[[2,0]] = bk
-b.display
-puts "Press enter to see jump_options"
-gets
+def test_moves
+  b = Board.new(false)
+  bp = Piece.new(:black, [1,1], b)
+  rp = Piece.new(:red, [2,2], b)
+  bk = Piece.new(:black, [2,0], b, true)
+  b[[1,1]] = bp
+  b[[2,2]] = rp
+  b[[2,0]] = bk
+  b.display
+  puts "Press enter to see jump_options"
+  gets
 
-# p "bp.slide_options == []: #{bp.slide_options == []}"
-# p "rp.slide_options == [[1, 3]]: #{rp.slide_options == [[1, 3]]}"
-# p "rp.slide_options == [[1, 3]]: #{bk.slide_options == [[3, 1]]}"
+  # p "bp.slide_options == []: #{bp.slide_options == []}"
+  # p "rp.slide_options == [[1, 3]]: #{rp.slide_options == [[1, 3]]}"
+  # p "rp.slide_options == [[1, 3]]: #{bk.slide_options == [[3, 1]]}"
 
-p "bp.jump_options == [[3, 3]]: #{bp.jump_options == [[3, 3]]}"
-p "rp.jump_options == [[0, 0]]: #{rp.jump_options == [[0, 0]]}"
-p "rp.jump_options == []: #{bk.jump_options == []}"
+  p "bp.jump_options == [[3, 3]]: #{bp.jump_options == [[3, 3]]}"
+  p "rp.jump_options == [[0, 0]]: #{rp.jump_options == [[0, 0]]}"
+  p "rp.jump_options == []: #{bk.jump_options == []}"
 
-puts "Press enter to perform jump"
-gets
+  puts "Press enter to perform jump"
+  gets
 
-p "bp.pos == [1,1]: #{bp.pos == [1,1]}"
-p "bp.jumped_pos([3, 3]) == [2, 2]: #{bp.jumped_pos([3, 3]) == [2, 2]}"
-p "bp.perform_jump([3, 3]): #{bp.perform_jump([3, 3])}"
-p "bp.pos == [3,3]: #{bp.pos == [3,3]}"
+  p "bp.pos == [1,1]: #{bp.pos == [1,1]}"
+  p "bp.jumped_pos([3, 3]) == [2, 2]: #{bp.jumped_pos([3, 3]) == [2, 2]}"
+  p "bp.perform_jump([3, 3]): #{bp.perform_jump([3, 3])}"
+  p "bp.pos == [3,3]: #{bp.pos == [3,3]}"
 
-p "rp.perform_jump([0, 0]) == false: #{rp.perform_jump([0, 0]) == false}"
+  p "rp.perform_jump([0, 0]) == false: #{rp.perform_jump([0, 0]) == false}"
 
-b.display
+  b.display
+end
+
+def show_board_initial_display
+  b = Board.new
+  b.display
+end
 
 
+#test_moves
+show_board_initial_display
 
 
   #------------------------------------------
