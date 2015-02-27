@@ -51,12 +51,11 @@ class Piece
   end
 
   def perform_slide(end_pos)
-    !!if slide_options.include?(end_pos)
+    if slide_options.include?(end_pos)
       @board.move(pos, end_pos)
+      return true
     end
-
-  # Write method perform_slide to perform a single move.
-  # An illegal slide/jump should return false; else true.
+    false
   end
 
   def jump_options
@@ -86,33 +85,15 @@ class Piece
   end
 
   def perform_jump(end_pos)
-    !!if jump_options.include?(end_pos)
+    if jump_options.include?(end_pos)
       @board.remove_piece_at(jumped_pos(end_pos))
       @board.move(pos, end_pos)
+      return true
     end
+    false
   end
 
   def move_sequence
 
   end
 end
-
-
-
-# ✓A non-king Piece can move forward only;
-# ✓kings can move backward and forward.
-#
-# ✓We probably don't need a PawnPiece and KingPiece;
-# just "promote" a Piece to king when it hits the opposite row by setting an ivar.
-#
-# Make sure to possibly promote after each move;
-# I wrote a method #maybe_promote which checked to see if the piece reached the back row.
-#
-# ✓Write methods perform_slide and perform_jump to perform a single move.
-# ✓An illegal slide/jump should return false; else true.
-#
-# ✓I wrote a helper method #move_diffs which returned the directions a piece could move in.
-#
-# ✓perform_jump should remove the jumped piece from the Board.
-#
-# Once you get perform_slide and perform_jump working, call over your TA and have them take a look.

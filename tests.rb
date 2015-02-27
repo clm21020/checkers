@@ -98,9 +98,9 @@ def test_promotion
 end
 
 
-test_promotion
+#test_promotion
 #test_jumps
-#test_slides
+test_slides
 #show_board_initial_display
 
 
