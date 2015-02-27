@@ -1,6 +1,6 @@
 require_relative 'board'
 
-def test_moves
+def test_jumps
   b = Board.new(false)
   bp = Piece.new(:black, [1,1], b)
   rp = Piece.new(:red, [2,2], b)
@@ -11,10 +11,6 @@ def test_moves
   b.display
   puts "Press enter to see jump_options"
   gets
-
-  # p "bp.slide_options == []: #{bp.slide_options == []}"
-  # p "rp.slide_options == [[1, 3]]: #{rp.slide_options == [[1, 3]]}"
-  # p "rp.slide_options == [[1, 3]]: #{bk.slide_options == [[3, 1]]}"
 
   p "bp.jump_options == [[3, 3]]: #{bp.jump_options == [[3, 3]]}"
   p "rp.jump_options == [[0, 0]]: #{rp.jump_options == [[0, 0]]}"
@@ -33,40 +29,71 @@ def test_moves
   b.display
 end
 
+def test_slides
+  b = Board.new(false)
+  bp = Piece.new(:black, [1,1], b)
+  rp = Piece.new(:red, [2,2], b)
+  bk = Piece.new(:black, [2,0], b, true)
+  b[[1,1]] = bp
+  b[[2,2]] = rp
+  b[[2,0]] = bk
+  b.display
+  puts "Press enter to see slide_options"
+  gets
+
+  p "bp.slide_options == []: #{bp.slide_options == []}"
+  p "rp.slide_options == [[1, 3]]: #{rp.slide_options == [[1, 3]]}"
+  p "bk.slide_options == [[3, 1]]: #{bk.slide_options == [[3, 1]]}"
+
+  puts "Press enter to perform slide"
+  gets
+
+  p "bp.perform_slide([2, 2]) == false: #{bp.perform_slide([2, 2]) == false}"
+  p "rp.pos == [2, 2]: #{rp.pos == [2, 2]}"
+  p "rp.perform_slide([1, 3]): #{rp.perform_slide([1, 3])}"
+  p "rp.pos == [1,3]: #{rp.pos == [1,3]}"
+
+  p "bk.perform_slide([3, 1]): #{bk.perform_slide([3, 1])}"
+
+  b.display
+end
+
 def show_board_initial_display
   b = Board.new
   b.display
 end
 
+def test_promotion
+  b = Board.new(false)
+  bp = Piece.new(:black, [6,0], b)
+  rp = Piece.new(:red, [1,7], b)
+  b[[6,0]] = bp
+  b[[1,7]] = rp
 
-#test_moves
-show_board_initial_display
+  b.display
+
+  puts "!bp.king? #{!bp.king?}"
+  puts "!rp.king? #{!rp.king?}"
+
+  puts "Press enter to see kings"
+  gets
+
+  bp.perform_slide([7,1])
+  rp.perform_slide([0,6])
+
+  b.display
+  puts "bp.king? #{bp.king?}"
+  puts "rp.king? #{rp.king?}"
+end
+
+
+test_promotion
+#test_jumps
+#test_slides
+#show_board_initial_display
 
 
   #------------------------------------------
-
-
-  # #Testing Movement
-  # bp = Piece.new(:black, [0,0], b)
-  # #p bp
-  # puts "black pawn move dirs: #{bp.move_dirs == [[1, 1], [1, -1]]}"
-  # puts "black pawn slide options: #{bp.slide_options == [[1, 1]]}"
-  #
-  # bk = Piece.new(:black, [1, 1], b, true)
-  # p bk
-  # puts "black king move dirs: #{bk.move_dirs == [[1, 1], [1, -1], [-1, 1], [-1, -1]]}"
-  # puts "black king slide options: #{bk.slide_options == [[2, 2], [2, 0], [0, 2], [0, 0]]}"
-  #
-  # rp = Piece.new(:red, [7, 7], b)
-  # p rp
-  # puts "red pawn move dirs: #{rp.move_dirs == [[-1, 1], [-1, -1]]}"
-  # puts "red pawn slide options: #{rp.slide_options == [[6, 6]]}"
-  #
-  # rk = Piece.new(:red, [6, 6], b, true)
-  # # p rk
-  # puts "red king move dirs: #{rk.move_dirs == [[-1, 1], [-1, -1], [1, 1], [1, -1]]}"
-  # puts "red king slide options: #{rk.slide_options == [[5, 7], [5, 5], [7, 7], [7, 5]]}"
-
 
 
   # #Testing king_me
