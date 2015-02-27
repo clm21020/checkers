@@ -3,8 +3,11 @@ require 'byebug'
 
 class Board
   CHECKERS = {
-    :black => "o".colorize(:black),
-    :red => "o".colorize(:red)
+    "black_pawn" => " o ".colorize(:black),
+    "red_pawn" => " o ".colorize(:red),
+    "black_king" => " k ".colorize(:black),
+    "red_king" => " k ".colorize(:red),
+    "nil" => "   "
   }
 
   def initialize(real_game = true)
@@ -33,8 +36,13 @@ class Board
 
       row.each_with_index do |piece, col_i|
         background = ((row_i + col_i) % 2 == 0) ? :light_black : :white
-        checker = (piece.nil? ? "   " : " #{CHECKERS[piece.color]} ")
-        pieces << checker.colorize(background: background)
+        if piece.nil?
+          type = "nil"
+        else
+          type = piece.color.to_s + (piece.king? ? "_king" : "_pawn")
+        end
+        
+        pieces << CHECKERS[type].colorize(background: background)
       end
       puts pieces.join
     end
